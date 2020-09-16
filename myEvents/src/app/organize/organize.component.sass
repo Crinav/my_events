@@ -1,0 +1,112 @@
+$darkblue : #1d3557
+$medblue: #457b9d
+$lightblue: #a8dadc
+$beige: #f1faee
+$red: #e76f51
+
+
+@media screen and (max-width: 320px)
+  .body_div
+    display: block !important
+  .div_filter
+    width: auto !important
+    margin: 0
+  .info_map
+    display: block !important
+
+.title-center
+  text-align: center
+
+.body_div
+    display: inline-flex
+
+.div_filter
+    width: 200px
+    min-height: 400px
+    padding-left: 20px
+    padding-right: 10px
+    padding-top: 20px
+    border-right: 3px solid $darkblue
+    background-color: $beige
+
+.div_3
+  width: 100%
+  padding: 15px
+
+.info_map
+  display: inline-flex
+
+.div_info
+  padding: 10px
+  width: 50%
+
+.div_map
+  border: 2px solid $darkblue
+
+h1
+  color: $darkblue
+h2
+  color: $darkblue
+
+h3
+    margin-top: 0
+    color: $darkblue
+
+.space_input
+    margin-top: 15px
+
+.red
+  color:$red
+
+.div_chat
+  border: 2px solid #dedede
+  background-color: #f1f1f1
+  border-radius: 5px
+  padding: 10px
+  margin: 5px
+  margin-top: 25px
+
+.btn_sm
+  margin-left: 20px
+
+.chatbox__messages__user-message:nth-child(odd)
+  background: #ddd
+  border-radius: 5px
+
+.chatbox__messages__user-message--ind-message
+  display: inline
+  width:150px
+
+.chat
+  margin-right: 20px
+  font-size: 25px
+  color : $darkblue
+
+.darker
+  border-color: #ccc
+  background-color: #ddd
+
+.div_chat::after
+  content: ""
+  clear: both
+  display: table
+
+.div_chat img
+  float: left
+  max-width: 60px
+  width: 100%
+  margin-right: 20px
+  border-radius: 50%
+
+.div_chat img.right
+  float: right
+  margin-left: 20px
+  margin-right:0
+
+.time-right
+  float: right
+  color: #aaa
+
+.time-left
+  float: left
+  color: #999

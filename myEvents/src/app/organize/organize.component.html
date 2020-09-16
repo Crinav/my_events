@@ -1,0 +1,104 @@
+<div class="body_div">
+  <div class="div_filter">
+
+    <div *ngIf="infoUser.id === id_org">
+      <div>
+        <div class="title-center">
+          <h4>Cette sortie sera :</h4>
+          <div class="custom-control custom-radio">
+            <input id="public" type="radio" class="custom-control-input" value="public" name="genre" [(ngModel)]="genre"
+              (change)="changeGenre($event)">
+            <label class="custom-control-label" for="male">Publique</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="private" type="radio" class="custom-control-input" value="private" name="genre"
+              [(ngModel)]="genre" (change)="changeGenre($event)">
+            <label class="custom-control-label" for="female">Privée</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="title-center" #friendsForm="ngForm" *ngIf="genre == 'private'"
+      (submit)="addFriendsForm(friendsForm.value)">
+      <small><label for="pseudo">Ajouter des amis par leur pseudo</label></small>
+      <input type="text" name="pseudo" [(ngModel)]="pseudo" />
+
+      <div *ngIf="error !== '' " style="color:red">{{error}}</div>
+      <button type="submit" class="btn btn_blue">Ajouter</button>
+    </form>
+    <br/><hr/><br/>
+    <h3 style="text-align:center">PARTICIPANTS</h3>
+    <p style="text-align:center"><b>{{count}} personnes</b></p>
+
+    <div *ngFor="let info of friends | keyvalue" class="space_input">
+      <fieldset>
+        <img [src]="info.value.avatar" width="50" height="50" />
+        <b>{{info.value.pseudo}}</b>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="div_3">
+    <div class="info_map">
+
+      <div class="div_info">
+        <h2>{{events.title}}</h2>
+        <div *ngIf="events.images !== undefined && events.images !== null">
+          <img src="{{image.medium.url}}" alt="image de l'évènement" width="25px"/>
+        </div>
+        <div *ngIf="events.images == undefined || events.images == null">
+          <img src="https://www.hameaudeletoile.com/images-hameau/theme/evenement.png" width="25px">
+        </div>
+        <h3>Le {{events.start_time | date: 'dd/MM/yyyy'}}&nbsp; à {{events.city}}</h3>
+        <span class="underline">Lieu</span> : {{events.venue_name}}<br/>
+        {{events.address}} - {{events.city}} {{events.country}}<br/><br/>
+        <div>
+          <div *ngIf="events.links !== null && events.links !== undefined">
+            <a href={{events.links.link[0].url}} target="_blank">Réserver un billet</a>
+          </div>
+          <button class="btn btn_blue" [routerLink]="'/home'"><b>Back</b></button>
+        </div>
+
+      </div>
+
+      <div class="div_map">
+        <iframe scrolling="no" marginheight="0" marginwidth="0" [src]="gps | safe" width="100%" height="300"
+          frameborder="0">
+        </iframe>
+      </div>
+    </div>
+
+    <div class='div_chat' ng-cloak ng-app="chatApp">
+
+      <form (ngSubmit)="sendMess(insertId,infoUser.id)"  novalidate>
+        <span class="chat">Chat</span><input type="text" placeholder="Entrez votre message" name="message" [(ngModel)]="sendChat">
+        <button class="btn btn_medblue btn_sm" click="getAllMess()" >Envoyer</button>
+      </form>
+      <div class='chatbox' ng-controller="MessageCtrl as chatMessage">
+        <div class="chatbox__messages" *ngFor="let message of messages | keyvalue">
+          <div class="chatbox__messages__user-message">
+            <div class="chatbox__messages__user-message--ind-message">
+              <img width="53" height="53" BORDER=1 [src]="message.value.avatar" alt="Avatar">
+              <p class="name"><b>{{message.value.pseudo}}</b> : {{message.value.message}}</p>
+              <br/>
+
+            </div>
+            <div class="message">
+              <p></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+  <!-- eventful: {{event_id}}
+  insertId ou event_id : {{insertId}}
+  id_org : {{id_org}}
+  infoUser.id : {{infoUser.id}}
+  friends : {{friends}} -->
+
+

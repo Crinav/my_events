@@ -1,0 +1,86 @@
+<div style="text-align:center" class="app_div">
+  <a [routerLink]="['/home/']" class="title_a"><h1>My events</h1></a>
+
+  <div *ngIf="!status || status === 'disconnect'">
+    <!-- <button class="btn btn_medblue" (click)="login()">Se connecter</button> -->
+  </div>
+  <button class="btn btn_medblue btn_sm" (click)="disconnect()">Se déconnecter</button>
+</div>
+
+<div *ngIf="status === 'connected'" class="div_user" >
+  <div *ngIf="user_exist === 'user exist' && userFb" class="info_user">
+    <img width="80px" height="80px" BORDER=3 src="{{infoUser.avatar}}" alt="avatar">
+    <div class="infos">
+      <h5>{{infoUser.pseudo}}</h5>
+      <h5><i>"{{infoUser.description}}"</i></h5>
+    </div>
+    <div class="div_btn">
+      <button class="btn btn_medblue btn_sm" (click)="editBtn()">Editer</button>
+      <button class="btn btn_medblue btn_sm" (click)="disconnect()">Se déconnecter</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="user_exist === 'editer'">
+    <form class="form_profil" #editForm="ngForm">
+      <div class="div_form">
+        <label for="pseudo">Votre pseudo</label>
+        <input type="text" name="pseudo" [(ngModel)]="pseudo"/>
+      </div>
+      <div class="div_form">
+        <p><b>Avatar actuel</b></p>
+        <img width="80px" height="80px" BORDER=3 src="{{infoUser.avatar}}" alt="avatar">
+      </div>
+      <div class="div_form">
+        <label for="avatar">Avatar (url)</label>
+        <input type="text" name="avatar" [(ngModel)]="avatar"/>
+      </div>
+      <div class="div_form">
+        <label for="description">Texte de présentation (facultatif)</label>
+        <textarea name="description" [(ngModel)]="description" rows="5" cols="33"></textarea>
+        <p>Votre texte actuel:<br/>{{infoUser.description}}</p>
+      </div>
+
+      <div class="div_form_btn">
+        <button (click)="editProfil()" type="submit" class="btn btn_red">Editer</button>
+        <button (click)="deleteProfil()" class="btn btn_red">Supprimer mon profil</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="!user_exist">
+    <h2>Bonjour et bienvenue<br/>{{userFb.first_name}} !</h2>
+    <form class="form_profil" #profilForm="ngForm">
+      <div class="div_form">
+        <label for="pseudo">Votre pseudo</label>
+        <input type="text" name="pseudo" [(ngModel)]="pseudo"/>
+      </div>
+      <div class="div_form">
+        <label>Avatar suggéré</label>
+        <img width="80px" height="80px" BORDER=3 src="//graph.facebook.com/{{userFb.id}}/picture?type=large" alt="fb_photo">
+      </div>
+      <div class="div_form">
+        <label for="avatar">Sélectionner votre avatar</label>
+        <select [(ngModel)]="url_avatar" name="url_avatar">
+          <option value="//graph.facebook.com/{{userFb.id}}/picture?type=large" selected>utiliser ma photo fb</option>
+          <option value="https://www.shareicon.net/data/2016/09/01/822711_user_512x512.png">en choisir un plus tard</option>
+        </select>
+      </div>
+      <div class="div_form">
+        <label for="description">Texte de présentation (facultatif)</label>
+        <textarea name="description" [(ngModel)]="description" rows="5" cols="33" placeholder="Dites-en un peu plus sur vous..."></textarea>
+      </div>
+
+      <div class="div_form_btn">
+        <button (click)="add_user()" type="submit" class="btn btn_red">Valider</button>
+    </div>
+    <div *ngIf="error === 'pseudo_exist'">
+      <h3 class="error">Pseudo non disponible, veuillez changer svp</h3>
+    </div>
+    </form>
+  </div>
+
+
+</div>
+
+<router-outlet></router-outlet>

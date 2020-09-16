@@ -1,0 +1,44 @@
+<div class="div_user">
+    <div *ngIf="infoUser.id == user.id">
+        <h2 style="text-align:center">MES SORTIES</h2>
+    </div>
+    <div *ngIf="infoUser.id !== user.id" class="member">
+        <div>
+            <img src="{{user.avatar}}" alt="avatar" BORDER=3 width="150px">
+        </div>
+        <div class="div_user_info">
+            <h2>{{user.pseudo}}</h2><br/>
+            <p>{{user.description}}</p>
+        </div>
+    </div>
+    <hr>
+    <div><br/>
+        <h2 *ngIf="!my_sort && !events">Ne participe à aucun événement</h2>
+        <h2 *nIf="events">Événements organisés publiques :</h2>
+        <ul *ngFor="let event of events  | keyvalue" >
+            <li>
+                <div class="div_img">
+                    <img src="https://www.hameaudeletoile.com/images-hameau/theme/evenement.png" width="100px">
+                </div>
+                <div class="div_event_title">
+                    <h2>{{event.value.name}}</h2>
+                    <button [routerLink]="['/event/', event.value.id_eventful]" class="btn btn_sm btn_lightblue">Voir +</button>
+                </div>
+            </li>
+        </ul>
+        <h2 *ngIf="my_sort">Participe à :</h2>
+        <ul *ngFor="let sort of my_sort  | keyvalue" >
+            <li>
+                <div class="div_img">
+                    <img src="https://www.hameaudeletoile.com/images-hameau/theme/evenement.png" width="100px">
+                </div>
+                <div class="div_event_title">
+                    <h2>{{sort.value.name}}</h2>
+                    <button [routerLink]="['/event/', sort.value.id_eventful]" class="btn btn_sm btn_lightblue">Voir +</button>
+                </div>
+            </li>
+        </ul>
+        <button class="btn btn_blue" [routerLink]="'/home'"><b>Back</b></button>
+    </div>
+
+</div>

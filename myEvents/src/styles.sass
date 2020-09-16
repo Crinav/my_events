@@ -1,0 +1,63 @@
+$darkblue : #1d3557
+$medblue: #457b9d
+$lightblue: #a8dadc
+$beige: #f1faee
+$red: #e76f51
+
+body
+    background-color: white
+    margin-right: 10%
+    margin-left: 10%
+    border: 5px solid $darkblue
+    min-height: 700px
+
+@media screen and (max-width: 1024px)
+  body
+    margin: 0 !important
+
+@media screen and (max-width: 321px)
+  body
+    margin: 0 !important
+    border: none
+
+
+.btn
+  cursor: pointer
+  margin-right: 10px
+  margin-top: 15px
+  padding: 10px
+  border-radius: 10px
+  cursor: pointer
+  background-color: $darkblue
+  font-weight: bold
+
+.btn_red
+  color: $red
+  border: 3px solid $red
+
+.btn_blue
+  color: $lightblue
+  border: 3px solid $lightblue
+
+.btn_lightblue
+  color: $medblue
+  border: 3px solid $lightblue
+  background-color: $beige
+
+.btn_medblue
+    border: 3px solid $medblue
+    color: $medblue
+    background-color: $beige
+
+.btn_bluemed
+    border: 3px solid $medblue
+    color: white
+
+.btn_darkblue
+    border: 3px solid $darkblue
+    color: white
+
+.btn_sm
+    padding: 5px !important
+
+

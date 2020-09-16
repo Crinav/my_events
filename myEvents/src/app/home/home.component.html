@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="body_div">
+    <div class="div_filter">
+      <h3 class="menu">FILTRE</h3>
+
+      <form  (ngSubmit)="getData()"  novalidate>
+        <div class="space_input">
+          <label for="town">Ville</label><br>
+          <input type="text" name="town" [(ngModel)]="queryT">
+        </div>
+        <div class="space_input">
+          <label for="keywords">Mot-clé</label><br>
+          <input type="text" name="keywords" [(ngModel)]="queryK" >
+        </div>
+        <div class="space_input">
+          <label for="date">Date</label><br>
+          <input type="date" name="date" [(ngModel)]="queryD" >
+        </div>
+        <div class="space_btn">
+          <button class="btn btn_blue" >Chercher</button>
+        </div>
+      </form>
+      <br/><hr><br/>
+
+      <div *ngIf="infoUser === null"class="space_btn">
+        <button class="btn btn_blue btn_sm" (click)="btnMembre()">Espace membre</button>
+      </div>
+
+      <div *ngIf="infoUser !== null">
+        <div>
+          <br/><h3 class="menu">MES SORTIES</h3>
+          <h4 *ngFor="let event of my_events  | keyvalue">
+            <a [routerLink]="['/eventful/', event.value.id_eventful, event.value.id_event]">{{event.value.name}}</a>
+        </h4>
+        </div>
+        <br/><hr><br/>
+        <div>
+            <h3 class="menu">MEMBRES</h3>
+            <h4 *ngFor="let info of users  | keyvalue">
+                <a [routerLink]="['/member/', info.value.pseudo]">{{info.value.pseudo}}</a>
+            </h4>
+        </div>
+        <div class="space_btn">
+          <button class="btn btn_blue" (click)="btnMembre()">Voir</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngIf="!selectedEvent" [event]="selectedEvent" class="div_event">
+      <ul>
+        <h3>Evènements : 
+          <span *ngIf="queryT"> <i>"{{queryT}}"</i> - </span>
+          <span *ngIf="queryK"> <i>"{{queryK}}"</i> - </span>
+          <span *ngIf="queryD"> <i>"{{queryD}}"</i> - </span>
+          <span *ngIf="collection.count > 0">&nbsp;{{count}} réponses</span>
+          <span *ngIf="collection.count == 0"> Recherche...</span>
+        </h3>
+        <p *ngIf="msg == false" style="color: red">Pas de résultat pour votre recherche</p>
+
+        <li *ngFor="let event of collection.data  | keyvalue | paginate: config">
+
+          <h2>{{event.value.event.title}}</h2>
+          <div class="div_img_txt">
+            <div *ngIf="event.value.event.image == null" class="img_border">
+              <img src="https://www.hameaudeletoile.com/images-hameau/theme/evenement.png" width="150px">
+            </div>
+            <div *ngIf="event.value.event.image !== null" class="img_border">
+              <img src="{{event.value.event.image.medium.url}}" width="200px">
+            </div>
+            <div class="info_border">
+              <b>{{event.value.event.start_time | date: 'dd/MM/yyyy'}}</b><br />
+              <b>{{event.value.event.city_name}}</b><br /><br />
+              {{event.value.event.venue_name}}
+            </div>
+          </div>
+          <div>
+            <button [routerLink]="['/event/', event.value.event.id]" class="btn btn_darkblue"
+              (click)="selectEvent(event)"><b>Voir plus...</b></button>
+          </div>
+        </li>
+      </ul>
+      <pagination-controls *ngIf="collection.count > 0" (pageChange)="pageChanged($event)" previousLabel="Préc"
+        nextLabel="Suiv" responsive="true"></pagination-controls>
+    </div>
+  </div>
+</div>

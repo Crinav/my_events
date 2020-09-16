@@ -1,0 +1,91 @@
+<div class="div_events">
+  <h2>{{events.title}}</h2>
+  <div class="div_lign">
+    <div *ngIf="events.images !== undefined && events.images !== null">
+      <img src="{{image.medium.url}}" alt="image de l'évènement" width="250px" />
+    </div>
+    <div *ngIf="events.images == undefined || events.images == null">
+      <img src="https://www.hameaudeletoile.com/images-hameau/theme/evenement.png" width="250px">
+    </div>
+    <div class="div_lieu_date">
+      <h3> Date : {{events.start_time | date: 'dd/MM/yyyy'}} <br />lieu &nbsp;&nbsp;: {{events.city}}</h3><br />
+    </div>
+  </div>
+  <div><span class="underline">Description</span> :</div>
+  <div [innerHTML]="events.description"></div><br />
+  <div><span class="underline">Lieu</span> : {{events.venue_name}}</div>
+  <div><span class="underline">Adresse</span> : {{events.address}} - {{events.city}}</div>
+  ​<div>{{events.region}} - {{events.country}}</div><br />
+  <div>
+    <a href={{events.url}} target="_blank">Plus d'info sur l'évènement</a><br />
+    <div *ngIf="events.links !== null && events.links !== undefined">
+      <a href={{events.links.link[0].url}} target="_blank">Réserver un billet</a>
+    </div>
+  </div>
+  <button class="btn btn_blue" [routerLink]="'/home'">Back</button>
+  <div *ngIf="infoUser !== undefined">
+    <button class="btn btn_red" (click)="createEvent()">Organiser une sortie</button>
+  </div>
+</div>
+
+<div *ngIf="count > 0" class="div_events">
+  <h2>Sorties publiques : {{count}}</h2>
+  <ul *ngFor="let event of sorties  | keyvalue">
+    <li>
+      <div class="div_event_title">
+        <div>
+          <h4>{{event.value.name}}</h4><span></span>
+          <button (click)="voirEvent(event.value.id_event, event.value.id_eventful)" class="btn btn_sm btn_medblue">Fiche de la sortie</button>
+          <p *ngIf="infoUser.id === event.value.id_org">
+            <button (click)="delEvent(event.value.id_event, event.value.id_org)"
+              class="btn btn_sm btn_lightblue">Annuler la sortie
+            </button>
+            <b>Organisateur</b>
+          </p>
+          <p *ngIf="arrayPartByEvent[event.value.id_event].includes(infoUser.id) && infoUser.id !== event.value.id_org">Vous êtes incrit à cette sortie</p>
+        </div>
+        <div class="div_btn">
+          <button *ngIf="infoUser.id !== event.value.id_org"
+            (click)="joinEvent(event.value.id_event, event.value.id_org)"
+            class="btn btn_sm btn_lightblue">Rejoindre</button>
+        </div>
+        <div class="div_btn">
+          <p *ngIf="!arrayPartByEvent[event.value.id_event].includes(infoUser.id)">
+            <button (click)="joinEvent(event.value.id_event, event.value.id_org)"
+              class="btn btn_sm btn_lightblue">Rejoindre</button>
+          </p>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <button class="btn btn_blue" [routerLink]="'/home'">Back</button>
+</div>
+
+<div *ngIf="countPrivate > 0" class="div_events">
+  <h2>Sorties privées : {{countPrivate}}</h2>
+  <ul *ngFor="let event of sortiesPrivate  | keyvalue">
+    <li>
+      <div class="div_event_title">
+        <div>
+          <h4>{{event.value.name}}</h4>
+          <button (click)="voirEvent(event.value.id_event, event.value.id_eventful)" class="btn btn_sm btn_medblue">Fiche de la sortie</button>
+          <p *ngIf="arrayPartByEventPrivate[event.value.id_event].includes(infoUser.id) && infoUser.id !== event.value.id_org">Vous êtes incrit à cette sortie</p>
+          <div *ngIf="infoUser.id === event.value.id_org">
+            <b>Organisateur&nbsp;&nbsp;</b>
+            <button (click)="delEvent(event.value.id_event, event.value.id_org)"
+              class="btn btn_sm btn_lightblue">Annuler la sortie</button>
+          </div>
+        </div>
+        <div class="div_btn">
+          <p *ngIf="!arrayPartByEvent[event.value.id_event].includes(infoUser.id)">
+            <button (click)="joinEvent(event.value.id_event, event.value.id_org)"
+              class="btn btn_sm btn_lightblue">Rejoindre</button>
+          </p>
+        </div>
+        
+      </div>
+    </li>
+  </ul>
+  <button class="btn btn_blue" [routerLink]="'/home'">Back</button>
+</div>
+
