@@ -3,7 +3,7 @@ A site web to manage events with friends
 
 A group (2 pers.) project (2 weeks)
 ___   
-![alt text](https://github.com/Crinav/Tweet_Academie/blob/master/Tweet%20Acad%C3%A9mie.png "main page")  
+![alt text](https://github.com/Crinav/my_events/blob/master/Screenshot0.png "main page") 
 ___  
 
 ## Languages
@@ -26,16 +26,14 @@ Copyright (©) Christophe Navarro <navarro.christophe@gmail.com>
 [Portfolio](https://portfolio-chris.herokuapp.com/) 
 
 ## Screenshots
-  
-![alt text](https://github.com/Crinav/my_events/blob/master/screenshot0.png "main page")  
+   
+
+![alt text](https://github.com/Crinav/my_events/blob/master/Screenshot1.png)   
 ___  
 
-![alt text](https://github.com/Crinav/my_events/blob/master/screenshot1.png)   
+![alt text](https://github.com/Crinav/my_events/blob/master/Screenshot2.png)  
 ___  
 
-![alt text](https://github.com/Crinav/my_events/blob/master/screenshot2.png)  
-___  
-
-![alt text](https://github.com/Crinav/my_events/blob/master/screenshot3.png)   
+![alt text](https://github.com/Crinav/my_events/blob/master/Screenshot3.png)   
 ___  
   
